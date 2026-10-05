@@ -1,0 +1,47 @@
+# Remoter actions for the hub machine as a target.
+#
+# A WHITELIST, as on every node: nothing outside this file can be run through
+# the Actions tier. Each runs as the node's user (no sudo; the docker
+# actions need it in the docker group).
+# Edit freely: ~/.config/remoter/actions.yaml on the hub machine, then
+# `sudo systemctl restart remoter-node`.
+
+- id: uptime
+  label: Uptime & load
+  icon: clock
+  run:
+    default: { cmd: uptime, args: [] }
+
+- id: disk-free
+  label: Disk free
+  icon: hard-drive
+  run:
+    default: { cmd: df, args: [-h, -x, tmpfs, -x, devtmpfs, -x, overlay] }
+
+- id: memory
+  label: Memory
+  icon: cpu
+  run:
+    default: { cmd: free, args: [-h] }
+
+- id: containers
+  label: Containers
+  icon: box
+  run:
+    default: { cmd: docker, args: [ps, -a, --format, "table {{.Names}}\t{{.Status}}"] }
+
+- id: tailscale-status
+  label: Tailscale status
+  icon: network
+  run:
+    default: { cmd: tailscale, args: [status] }
+
+# Restarting a container: copy this once per service, name the container(s),
+# and uncomment. Several names after `restart` restart together.
+#
+# - id: restart-app
+#   label: Restart app
+#   icon: refresh
+#   confirm: true
+#   run:
+#     default: { cmd: docker, args: [restart, my-app] }

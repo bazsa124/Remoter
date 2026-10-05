@@ -1,0 +1,18 @@
+{
+	"name": "Remoter",
+	"short_name": "Remoter",
+	"description": "Tiered remote control for a home PC",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#0b0d10",
+	"theme_color": "#0b0d10",
+	"orientation": "portrait",
+	"icons": [
+		{
+			"src": "/icon.svg",
+			"sizes": "any",
+			"type": "image/svg+xml",
+			"purpose": "any maskable"
+		}
+	]
+}

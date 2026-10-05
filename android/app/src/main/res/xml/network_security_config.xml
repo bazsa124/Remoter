@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    HTTPS only. The hub serves a Let's Encrypt certificate that tailscaled
+    obtains for its MagicDNS name, so the system trust store is all that is
+    needed - no pinning, no cleartext exception. Traffic is encrypted by TLS on
+    top of Tailscale's WireGuard tunnel, and neither depends on the other.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

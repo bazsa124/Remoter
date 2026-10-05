@@ -1,0 +1,35 @@
+# Build output (deploy\build.ps1)
+/dist/
+*.exe
+*.apk
+*.aab
+
+# Machine-local settings: SDK path, this install's hub URL
+android/local.properties
+.env.local
+
+# Gradle / Android Studio
+android/.gradle/
+android/build/
+android/app/build/
+android/.kotlin/
+android/captures/
+.idea/
+*.iml
+
+# Signing keys
+*.keystore
+*.jks
+
+# Runtime state a node or hub may leave in a working copy: tokens, PIN hash,
+# enrolment, audit log
+token
+state.json
+hub.json
+wifi.json
+arm.json
+*.log
+
+# OS / editors
+.DS_Store
+Thumbs.db

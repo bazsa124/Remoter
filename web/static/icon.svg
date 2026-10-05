@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Remoter">
+	<rect width="512" height="512" rx="112" fill="#0b0d10" />
+	<!-- Four bars: the tier ladder the whole project is built around. -->
+	<g fill="#5eb0ef">
+		<rect x="112" y="336" width="288" height="26" rx="13" opacity="0.45" />
+		<rect x="112" y="278" width="230" height="26" rx="13" opacity="0.6" />
+		<rect x="112" y="220" width="172" height="26" rx="13" opacity="0.8" />
+		<rect x="112" y="162" width="114" height="26" rx="13" />
+	</g>
+	<circle cx="368" cy="175" r="26" fill="#4ade80" />
+</svg>

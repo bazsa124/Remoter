@@ -1,0 +1,77 @@
+# Remoter action registry.
+#
+# This file is a WHITELIST. The agent has no endpoint that runs an arbitrary
+# string - if something is not here, it cannot be triggered remotely.
+#
+# Each action resolves one command for the running OS: a `run` key matching
+# GOOS, else `default`. An action with neither is listed as unavailable, with
+# the reason shown in the UI, rather than silently hidden.
+#
+# Windows note: console programs emit legacy-codepage bytes unless told
+# otherwise, which mangles accented text. Force UTF-8 in the command itself,
+# as the disk-space action below does.
+
+- id: uptime
+  label: Uptime
+  icon: clock
+  run:
+    windows:
+      cmd: powershell.exe
+      args:
+        - -NoProfile
+        - -Command
+        - "(Get-Date) - (Get-CimInstance Win32_OperatingSystem).LastBootUpTime | Select-Object -ExpandProperty TotalHours"
+    default:
+      cmd: uptime
+      args: []
+
+- id: disk-free
+  label: Disk free
+  icon: hard-drive
+  run:
+    windows:
+      cmd: powershell.exe
+      args:
+        - -NoProfile
+        - -Command
+        - "[Console]::OutputEncoding=[Text.Encoding]::UTF8; Get-PSDrive -PSProvider FileSystem | Format-Table -AutoSize | Out-String"
+    default:
+      cmd: df
+      args: [-h]
+
+- id: tailscale-status
+  label: Tailscale status
+  icon: network
+  run:
+    windows:
+      cmd: C:\Program Files\Tailscale\tailscale.exe
+      args: [status]
+    default:
+      cmd: tailscale
+      args: [status]
+
+# Long-running work is what push notifications exist for.
+- id: build-agent
+  label: Build agent
+  icon: hammer
+  cwd: "~/Desktop/Repos/Projects/Remoter/agent"
+  timeout: 10m
+  notify: on-complete
+  run:
+    default:
+      cmd: go
+      args: [build, ./...]
+
+# confirm: true requires two POSTs - the first returns a nonce, the second
+# replays it. You cannot fat-thumb this one from a phone.
+- id: lock-workstation
+  label: Lock screen
+  icon: lock
+  confirm: true
+  run:
+    windows:
+      cmd: rundll32.exe
+      args: [user32.dll,LockWorkStation]
+    linux:
+      cmd: loginctl
+      args: [lock-session]

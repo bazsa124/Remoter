@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Remoter</string>
+    <string name="channel_name">Connection</string>
+    <string name="channel_desc">Keeps the Tier 1 link to the host open.</string>
+    <string name="node_channel_name">Remote access to this phone</string>
+    <string name="node_channel_desc">Shown while this phone can be controlled through the hub, and who is connected.</string>
+    <string name="a11y_label">Remoter remote control</string>
+    <string name="a11y_description">Lets your own Remoter hub see this phone\'s screen and tap, swipe and type on it, so you can use the phone from your other devices. Only devices you approved on the hub, with your PIN, can connect. Every session shows a notification on this phone.</string>
+</resources>
